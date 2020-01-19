@@ -39,14 +39,15 @@ async def playball(ctx):
             subjects.append(user)
     
     for subject in subjects:
-        if subject.status == users[0].status:
+        if subject.status == online:
             online.append(subject)
     subject = random.choice(subjects)
 
     queries = ["do you want to be repeatedly shot full of questionable substances for very little test value? No response? Excellent!", "how do you feel about hypodermic uranium tattoos?", "I'm just gonna need you to hold still while I administer this harmless carcinogen." , "needs restraints! Hold them down!", "it says you requested electro shock treatments. I'm happy to oblige!"]
     question = random.choice(queries)
     await ctx.channel.send(f"{subject.mention} {question}")
-    print(type(subject.status))
+    
+    print(len(users))
     print(len(online))
 @bot.command(name="test")
 async def test(ctx):
