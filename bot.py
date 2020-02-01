@@ -44,7 +44,7 @@ async def playball(ctx):
     question = random.choice(queries)
     if len(ballers) > 0:
         await channel.send(f"{baller.mention} {question}? {author.mention} wants to play.")
-    else:
+    elif len(ballers) == 0:
         await channel.send(f"Sorry, there are currently no IdeaBallers online. Maybe try again later? Please don't hit me.")
 
 
@@ -55,7 +55,7 @@ async def setup(ctx):
     guild = ctx.guild
     channel = ctx.channel
     if get(guild.roles, name="IdeaBall", color="#ffff33"):
-        await channel.send("Role Exists")
+        await channel.send(f"Nice try, {ctx.author.mention}, that role already exists. You're gonna have to get up pretty early to fool this bot.")
     else:
         await guild.create_role(name="IdeaBall")
     
@@ -102,4 +102,4 @@ async def check_players(ctx):
     else:
         await channel.send(f"There are no IdeaBallers online who aren't {author.mention}. Try again later.")
 
-bot.run("NjY0MTg0NTE2MzIzMDQ5NDgy.XjXelg.31UTbCSDGtt4SR3VDjoN_KNUrTI")
+bot.run("token goes here")
