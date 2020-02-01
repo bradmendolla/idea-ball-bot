@@ -42,8 +42,10 @@ async def playball(ctx):
     baller = random.choice(ballers)
     queries = ["do you want to play IdeaBall"]
     question = random.choice(queries)
-    await channel.send(f"{baller.mention} {question}? {author.mention} wants to play.")
-    
+    if len(ballers) > 0:
+        await channel.send(f"{baller.mention} {question}? {author.mention} wants to play.")
+    else:
+        await channel.send(f"Sorry, there are currently no IdeaBallers online. Maybe try again later? Please don't hit me.")
 
 
 #code to setup a role for idea ball
