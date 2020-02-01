@@ -6,11 +6,10 @@ from discord.utils import get
 
 bot = commands.Bot(command_prefix="!", case_insensitive = True)
 
+#test to make
 @bot.event
 async def on_ready():
     print(f"{bot.user.name} is ready and raring to go master!")
-
-
 
 # Test command
 

@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/brad/Documents/discord_bot"
+VIRTUAL_ENV="/home/brad/Documents/Projects/idea-ball-bot/discord_bot"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
