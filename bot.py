@@ -100,4 +100,4 @@ async def check_players(ctx):
     else:
         await channel.send(f"There are no IdeaBallers online who aren't {author.mention}. Try again later.")
 
-bot.run(NjY0MTg0NTE2MzIzMDQ5NDgy.XjXadw.ycSEEbxTKiPNd-jU08CJT8On8-s)
+bot.run("NjY0MTg0NTE2MzIzMDQ5NDgy.XjXadw.ycSEEbxTKiPNd-jU08CJT8On8-s")
