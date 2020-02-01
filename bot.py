@@ -1,6 +1,5 @@
 import discord
 import random
-from config import TOKEN, GUILD
 from discord.ext import commands
 from discord.utils import get
 
@@ -101,4 +100,4 @@ async def check_players(ctx):
     else:
         await channel.send(f"There are no IdeaBallers online who aren't {author.mention}. Try again later.")
 
-bot.run(TOKEN)
+bot.run(NjY0MTg0NTE2MzIzMDQ5NDgy.XjXadw.ycSEEbxTKiPNd-jU08CJT8On8-s)
