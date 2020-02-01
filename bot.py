@@ -1,6 +1,6 @@
 import discord
 import random
-from config import TOKEN, GUILD, ROLE
+from config import TOKEN, GUILD
 from discord.ext import commands
 from discord.utils import get
 
@@ -12,21 +12,11 @@ async def on_ready():
 
 
 
-
-
-#@bot.event
-#async def on_member_join(member):
-#    await member.create_dm()
-#    
-#    await member.dm_channel.send(f"Welcome to the Bot Factory, {member.mention}! Await your instructions from The Handsome One!")
-    
-
-
 # Test command
 
 @bot.command(name="claptrap", help="Invokes Claptrap")
 async def minion(ctx):
-    clapback = ["Yes, master?", "Oh god...Stairs!", "Save me minion!"]
+    clapback = ["Yes, minion?", "STAIRS? NOOOOOOOOOOOOOO!", "Save me minion!", "We've really come a long way, haven't we, minion?", "Let's get this party started!", "Glitching weirdness is a term of endearment, right?", "I AM GOING TO TEABAG YOUR CORPSE!", "Quick, minion, protect me with your face!", "Aaaand Open!", "Ah well -- now to slip back into the warm, comfy Christmas sweater that is my depression.", "Minion, what have you DONE?", "PROTECT ME, SQUIRE!", "Oh, SPHINCTERS!"]
 
 
     response = random.choice(clapback)
@@ -41,32 +31,30 @@ async def minion(ctx):
 async def playball(ctx):
     guild = ctx.guild
     channel = ctx.channel
+    author = ctx.author
     role = get(guild.roles, name="IdeaBall")
     users = role.members
     ballers = []
     for user in users:
-        if user.status == "online":
+        if user.status == discord.Status.online:
             ballers.append(user)
         else:
             pass
+    ballers = [name for name in ballers if name != author]
     baller = random.choice(ballers)
-    queries = ["do you want to be repeatedly shot full of questionable substances for very little test value? No response? Excellent!", "how do you feel about hypodermic uranium tattoos?", "I'm just gonna need you to hold still while I administer this harmless carcinogen." , "needs restraints! Hold them down!", "it says you requested electro shock treatments. I'm happy to oblige!"]
+    queries = ["do you want to play IdeaBall"]
     question = random.choice(queries)
-    #await channel.send(f"{baller.mention} {question}")
+    await channel.send(f"{baller.mention} {question}? {author.mention} wants to play.")
     
-    try:
-        await print(f"{len(ballers)} ")
-    except TypeError:
-        return
 
 
-#test code to setup a role for idea ball
+#code to setup a role for idea ball
 
 @bot.command()
 async def setup(ctx):
     guild = ctx.guild
     channel = ctx.channel
-    if get(guild.roles, name="IdeaBall"):
+    if get(guild.roles, name="IdeaBall", color="#ffff33"):
         await channel.send("Role Exists")
     else:
         await guild.create_role(name="IdeaBall")
@@ -76,16 +64,42 @@ async def setup(ctx):
 
 @bot.command(name="join", help="Join IdeaBall role")
 async def join(ctx):
+    channel = ctx.channel
     role = get(ctx.guild.roles, name="IdeaBall")
     user = ctx.message.author
     await user.add_roles(role)
+    await channel.send(f"{user.mention} has joined the IdeaBall role. You are now willing to play IdeaBall with other people on the server.")
 
 #code to leave role
-@bot.command(help="Leave IdeaBall role")
+@bot.command(name ="leave", help="Leave IdeaBall role")
 async def leave(ctx):
     role = get(ctx.guild.roles, name="IdeaBall")
     user = ctx.message.author
     await user.remove_roles(role)
+    await ctx.channel.send(f"{user.mention} has left the IdeaBall role. You are no longer willing to play IdeaBall with other people on the server.")
 
+#command to check number of players
+@bot.command(name="players", help="Check number of IdeaBallers online")
+async def check_players(ctx):
+    guild = ctx.guild
+    channel = ctx.channel
+    author = ctx.author
+    role = get(guild.roles, name="IdeaBall")
+    users = role.members
+    ballers = []
+    for user in users:
+        if user.status == discord.Status.online:
+            ballers.append(user)
+        else:
+            pass
+    ballers = [x for x in ballers if x != author]
+    if len(ballers) != 1:
+        await channel.send(f"There are {len(ballers)} IdeaBallers online that are not {author.mention}.")
+    
+    elif len(ballers) == 1:
+        await channel.send(f"There is {len(ballers)} IdeaBaller online who is not {author.mention}.")
+
+    else:
+        await channel.send(f"There are no IdeaBallers online who aren't {author.mention}. Try again later.")
 
 bot.run(TOKEN)
