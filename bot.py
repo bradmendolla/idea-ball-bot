@@ -18,6 +18,7 @@ async def minion(ctx):
 
 
     response = random.choice(clapback)
+
     await ctx.send(response)
 
 
@@ -102,4 +103,4 @@ async def check_players(ctx):
     else:
         await channel.send(f"There are no IdeaBallers online who aren't {author.mention}. Try again later.")
 
-bot.run("token goes here")
+bot.run("NjY0MTg0NTE2MzIzMDQ5NDgy.XjYCxQ.447i1RvKlUOdXhmF5Q8gcHIbjTI")
